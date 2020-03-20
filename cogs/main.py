@@ -148,7 +148,11 @@ class Main(commands.Cog):
                     msg = copy.copy(ctx.message)
                     msg.channel = channel
                     new_ctx = await self.bot.get_context(msg, cls=type(ctx))
-                    await self.close_channel(new_ctx, reason)
+                    data = self.bot.get_data(ctx.guild.id)
+                    if data[10] == 1:
+                        await self.close_channel(new_ctx, reason, True)
+                    else:
+                        await self.close_channel(new_ctx, reason)
         try:
             await ctx.send(
                 embed=discord.Embed(
