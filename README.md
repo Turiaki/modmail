@@ -1,3 +1,10 @@
+NOTES FROM YEAH NAH CUNT:
+
+Forked to add a feature to make sending and receiving messages in tickets anonymously
+
+Hoping this is possible well see how we go seeing as I have limited experience using SQL
+
+
 # ModMail
 
 [![Discord](https://discordapp.com/api/guilds/576016832956334080/embed.png)](https://discord.gg/wjWJwJB)
