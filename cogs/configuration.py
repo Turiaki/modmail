@@ -381,12 +381,12 @@ class Configuration(commands.Cog):
         if data[10] is None:
             c.execute("UPDATE data SET anon=? WHERE guild=?", (1, ctx.guild.id))
             await ctx.send(
-                embed=discord.Embed(description="Anonymous logging is enabled.", colour=self.bot.primary_colour,)
+                embed=discord.Embed(description="Anonymous messaging is enabled.", colour=self.bot.primary_colour,)
             )
         else:
             c.execute("UPDATE data SET anon=? WHERE guild=?", (None, ctx.guild.id))
             await ctx.send(
-                embed=discord.Embed(description="Anonymous logging is disabled.", colour=self.bot.primary_colour,)
+                embed=discord.Embed(description="Anonymous messaging is disabled.", colour=self.bot.primary_colour,)
             )
         self.bot.conn.commit()
         
