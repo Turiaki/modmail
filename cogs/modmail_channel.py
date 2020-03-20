@@ -50,6 +50,10 @@ class ModMailEvents(commands.Cog):
                     colour=self.bot.error_colour,
                 )
             )
+        data = self.bot.get_data(message.guild.id)
+        if data[10] == 1:
+            anon = True
+            
         try:
             embed = discord.Embed(
                 title="Message Received",
