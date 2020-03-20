@@ -369,6 +369,27 @@ class Configuration(commands.Cog):
             )
         self.bot.conn.commit()
 
-
+    @checks.in_database()
+    @commands.has_permissions(administrator=True)
+    @commands.guild_only()
+    @commands.command(
+        description="Toggle advanced anonymous messages sent and received to protect users information.", usage="anonymous"
+    )
+    async def anon(self, ctx):
+        data = self.bot.get_data(ctx.guild.id)
+        c = self.bot.conn.cursor()
+        if data[10] is None:
+            c.execute("UPDATE data SET anon=? WHERE guild=?", (1, ctx.guild.id))
+            await ctx.send(
+                embed=discord.Embed(description="Anonymous logging is enabled.", colour=self.bot.primary_colour,)
+            )
+        else:
+            c.execute("UPDATE data SET anon=? WHERE guild=?", (None, ctx.guild.id))
+            await ctx.send(
+                embed=discord.Embed(description="Anonymous logging is disabled.", colour=self.bot.primary_colour,)
+            )
+        self.bot.conn.commit()
+        
+        
 def setup(bot):
     bot.add_cog(Configuration(bot))
