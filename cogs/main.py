@@ -119,7 +119,11 @@ class Main(commands.Cog):
     @commands.guild_only()
     @commands.command(description="Close the channel.", usage="close [reason]")
     async def close(self, ctx, *, reason: str = None):
-        await self.close_channel(ctx, reason)
+        data = self.bot.get_data(ctx.guild.id)
+        if data[10] == 1:
+            await self.close_channel(ctx, reason, True)
+        else:
+            await self.close_channel(ctx, reason)
 
     @checks.is_modmail_channel()
     @checks.in_database()
