@@ -52,6 +52,13 @@ class DirectMessageEvents(commands.Cog, name="Direct Message"):
         new_ticket = False
         if len(channels) > 0:
             channel = channels[0]
+            
+        anon = False
+        data = self.bot.get_data(guild.id)
+        if data[10] == 1:
+            anon = True
+            
+            
         if not channel:
             self.bot.total_tickets += 1
             try:
@@ -73,8 +80,10 @@ class DirectMessageEvents(commands.Cog, name="Direct Message"):
                             title="New Ticket", colour=self.bot.user_colour, timestamp=datetime.datetime.utcnow(),
                         )
                         embed.set_footer(
-                            text=f"{message.author.name}#{message.author.discriminator} | {message.author.id}",
-                            icon_url=message.author.avatar_url,
+                            text=f"{message.author.name}#{message.author.discriminator} | {message.author.id}"if anon is False else "Anonymous#0000",
+                            icon_url=message.author.avatar_url
+                            if anon is False
+                            else "https://cdn.discordapp.com/embed/avatars/0.png",
                         )
                         await log_channel.send(embed=embed)
                     except discord.Forbidden:
@@ -109,8 +118,10 @@ class DirectMessageEvents(commands.Cog, name="Direct Message"):
                     timestamp=datetime.datetime.utcnow(),
                 )
                 embed.set_footer(
-                    text=f"{message.author.name}#{message.author.discriminator} | {message.author.id}",
-                    icon_url=message.author.avatar_url,
+                    text=f"{message.author.name}#{message.author.discriminator} | {message.author.id}"if anon is False else "Anonymous#0000",
+                    icon_url=message.author.avatar_url
+                    if anon is False
+                    else "https://cdn.discordapp.com/embed/avatars/0.png",
                 )
                 await channel.send(
                     content=f"<@&{data[8]}>" if data[8] and data[8] not in ["@here", "@everyone"] else data[8],
@@ -140,8 +151,10 @@ class DirectMessageEvents(commands.Cog, name="Direct Message"):
             message2 = await message.channel.send(embed=embed, files=files)
             embed.title = "Message Received"
             embed.set_footer(
-                text=f"{message.author.name}#{message.author.discriminator} | {message.author.id}",
-                icon_url=message.author.avatar_url,
+                text=f"{message.author.name}#{message.author.discriminator} | {message.author.id}"if anon is False else "Anonymous#0000",
+                icon_url=message.author.avatar_url
+                if anon is False
+                else "https://cdn.discordapp.com/embed/avatars/0.png",
             )
             for count, attachment in enumerate([attachment.url for attachment in message2.attachments], start=1):
                 embed.add_field(
