@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import sentry_sdk
+import discord
 from discord.ext import commands
 
 import config
@@ -31,6 +32,7 @@ bot = ModMail(
     help_command=None,
     owner_id=config.owner,
     heartbeat_timeout=300,
+    intents=discord.Intents.all(),
 )
 
 c = bot.conn.cursor()

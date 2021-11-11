@@ -101,6 +101,6 @@ class ModMail(commands.AutoShardedBot):
             try:
                 self.load_extension(extension)
             except Exception:
-                log.error(f"Failed to load extension {extension}.", file=sys.stderr)
+                log.error(f"Failed to load extension {extension}.")
                 log.error(traceback.print_exc())
         await self.start(self.config.token)

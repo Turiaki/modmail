@@ -57,7 +57,7 @@ class ModMailEvents(commands.Cog):
         try:
             embed = discord.Embed(
                 title="Message Received",
-                description=description= message.content,
+                description=message.content,
                 colour=self.bot.mod_colour,
                 timestamp=datetime.datetime.utcnow(),
             )
